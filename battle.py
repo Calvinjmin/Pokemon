@@ -40,16 +40,21 @@ def fight(pokemon1, pokemon2):
             if moveIndex < 0 or moveIndex > 4:
                 print("Invalid Move. Try Again.")
             else:
-                delay_print(
-                    f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}"
-                )
                 break
 
         # Calculate Damage to Pokemon 2
-        delay_print(
-            f"\n{pokemon1.name} dealt {pokemon1.move_set[moveIndex - 1].damage} to {pokemon2.name}"
-        )
-        pokemon2.health -= int(pokemon1.move_set[moveIndex - 1].damage)
+        randomHitCalc = randint(0, 100)
+        if randomHitCalc <= pokemon1.move_set[moveIndex - 1].accuracy:
+            delay_print(
+                f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}"
+            )
+            delay_print(
+                f"\n{pokemon1.name} dealt {pokemon1.move_set[moveIndex - 1].damage} to {pokemon2.name}"
+            )
+            pokemon2.health -= int(pokemon1.move_set[moveIndex - 1].damage)
+        else:
+            delay_print(f"\n{pokemon1.name}'s attack missed")
+
         if pokemon2.health <= 0:
             print(f"\n\n{pokemon2.name} fainted.")
             print(f"{pokemon1.name} won the fight.")
@@ -62,9 +67,9 @@ def fight(pokemon1, pokemon2):
 
         # Calculate Damage to Pokemon 1
         delay_print(
-            f"\n{pokemon2.name} dealt {pokemon2.move_set[moveIndex - 1].damage} to {pokemon1.name}\n"
+            f"\n{pokemon2.name} dealt {pokemon2.move_set[randomMoveIndex].damage} to {pokemon1.name}\n"
         )
-        pokemon1.health -= int(pokemon2.move_set[moveIndex - 1].damage)
+        pokemon1.health -= int(pokemon2.move_set[randomMoveIndex].damage)
         if pokemon1.health <= 0:
             print(f"\n\n{pokemon1.name} fainted.")
             print(f"{pokemon2.name} won the fight.")
