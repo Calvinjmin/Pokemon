@@ -62,14 +62,20 @@ def fight(pokemon1, pokemon2):
 
         # --- Pokemon 2's Turn ---
         randomMoveIndex = randint(0, 3)
-        delay_print(
-            f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex]}")
+        randomHitCalc = randint(0, 100)
+        if randomHitCalc <= pokemon2.move_set[randomMoveIndex].accuracy:
+            # Pokemon 2's Attack Hit
+            delay_print(
+                f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex]}")
 
-        # Calculate Damage to Pokemon 1
-        delay_print(
-            f"\n{pokemon2.name} dealt {pokemon2.move_set[randomMoveIndex].damage} to {pokemon1.name}\n"
-        )
-        pokemon1.health -= int(pokemon2.move_set[randomMoveIndex].damage)
+            # Calculate Damage to Pokemon 1
+            delay_print(
+                f"\n{pokemon2.name} dealt {pokemon2.move_set[randomMoveIndex].damage} to {pokemon1.name}\n"
+            )
+            pokemon1.health -= int(pokemon2.move_set[randomMoveIndex].damage)
+        else:
+            delay_print(f"\n{pokemon2.name}'s attack missed")
+
         if pokemon1.health <= 0:
             print(f"\n\n{pokemon1.name} fainted.")
             print(f"{pokemon2.name} won the fight.")
