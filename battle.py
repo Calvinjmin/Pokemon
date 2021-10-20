@@ -5,6 +5,9 @@ from random import randint
 
 
 def delay_print(string):
+    """"
+    Function that delays system printing
+    """
     for character in string:
         sys.stdout.write(character)
         sys.stdout.flush()
@@ -13,6 +16,7 @@ def delay_print(string):
 
 def fight(pokemon1, pokemon2):
     """
+    Function that conducts a turn-based battle between two pokemon
     Pokemon1 - User Pokemon
     Pokemon2 - Opposing Pokemon
     """
@@ -46,8 +50,7 @@ def fight(pokemon1, pokemon2):
         randomHitCalc = randint(0, 100)
         if randomHitCalc <= pokemon1.move_set[moveIndex - 1].accuracy:
             delay_print(
-                f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}"
-            )
+                f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}")
             delay_print(
                 f"\n{pokemon1.name} dealt {pokemon1.move_set[moveIndex - 1].damage} to {pokemon2.name}"
             )
