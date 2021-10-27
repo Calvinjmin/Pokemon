@@ -14,6 +14,7 @@ def main():
 
     battle.fight(Charizard, Dragonite)
 
+    # GUI Code - Implement in the future
     # myWindow = CustomWindow()
     # myWindow.start()
 
