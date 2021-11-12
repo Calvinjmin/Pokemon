@@ -12,7 +12,7 @@ def main():
     Main Method - INIT Pokemon Battle
     """
 
-    battle.fight(Lapras, Charizard)
+    battle.fight(Snorlax, Charizard)
 
     # GUI Code - Implement in the future
     # myWindow = CustomWindow()

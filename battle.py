@@ -2,7 +2,7 @@
 import sys
 import time
 from random import randint
-from typeEffective import effectiveness
+from typeEffective import *
 
 
 def delay_print(string):
@@ -56,16 +56,35 @@ def fight(pokemon1, pokemon2):
         # Calculate Damage to Pokemon 2
         randomHitCalc = randint(0, 100)
         if randomHitCalc <= pokemon1.move_set[moveIndex - 1].accuracy:
+            # Super Effective
             if pokemon2.type in effectiveness[pokemon1.move_set[moveIndex -
                                                                 1].type]:
                 delay_print(
                     f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}. It's super effective!"
                 )
                 delay_print(
-                    f"\n{pokemon1.name} dealt {2 * pokemon1.move_set[moveIndex - 1].damage} to {pokemon2.name}"
+                    f"\n{pokemon1.name} dealt {int(2 * pokemon1.move_set[moveIndex - 1].damage)} to {pokemon2.name}"
                 )
                 pokemon2.health -= int(2 *
                                        pokemon1.move_set[moveIndex - 1].damage)
+            # Not Very Effective
+            elif pokemon2.type in not_effective[pokemon1.move_set[moveIndex -
+                                                                  1].type]:
+                delay_print(
+                    f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}. Not very effective..."
+                )
+                delay_print(
+                    f"\n{pokemon1.name} dealt {int(0.5 * pokemon1.move_set[moveIndex - 1].damage)} to {pokemon2.name}"
+                )
+                pokemon2.health -= int(0.5 *
+                                       pokemon1.move_set[moveIndex - 1].damage)
+            # No Effect
+            elif pokemon2.type in effectiveness[pokemon1.move_set[moveIndex -
+                                                                  1].type]:
+                delay_print(
+                    f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}. No effect."
+                )
+                delay_print(f"\n{pokemon1.name} dealt 0 to {pokemon2.name}")
             else:
                 delay_print(
                     f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}"
@@ -87,14 +106,46 @@ def fight(pokemon1, pokemon2):
         randomHitCalc = randint(0, 100)
         if randomHitCalc <= pokemon2.move_set[randomMoveIndex].accuracy:
             # Pokemon 2's Attack Hit
-            delay_print(
-                f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex]}")
+            # Super Effective
+            if pokemon1.type in effectiveness[pokemon2.move_set[randomMoveIndex
+                                                                - 1].type]:
+                delay_print(
+                    f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex - 1]}. It's super effective!"
+                )
+                delay_print(
+                    f"\n{pokemon2.name} dealt {int(2 * pokemon2.move_set[randomMoveIndex - 1].damage)} to {pokemon1.name}"
+                )
+                pokemon2.health -= int(2 *
+                                       pokemon1.move_set[moveIndex - 1].damage)
+            # Not Very Effective
+            elif pokemon1.type in not_effective[pokemon2.move_set[
+                    randomMoveIndex - 1].type]:
+                delay_print(
+                    f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex - 1]}. Not very effective..."
+                )
+                delay_print(
+                    f"\n{pokemon2.name} dealt {int(0.5 * pokemon2.move_set[randomMoveIndex - 1].damage)} to {pokemon1.name}"
+                )
+                pokemon2.health -= int(0.5 *
+                                       pokemon1.move_set[moveIndex - 1].damage)
+            # No Effect
+            elif pokemon1.type in effectiveness[pokemon2.move_set[
+                    randomMoveIndex - 1].type]:
+                delay_print(
+                    f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex - 1]}. No Effect."
+                )
+                delay_print(f"\n{pokemon2.name} dealt 0 to {pokemon1.name}")
+            else:
+                delay_print(
+                    f"\n{pokemon2.name} used {pokemon2.move_set[randomMoveIndex]}"
+                )
 
-            # Calculate Damage to Pokemon 1
-            delay_print(
-                f"\n{pokemon2.name} dealt {pokemon2.move_set[randomMoveIndex].damage} to {pokemon1.name}\n"
-            )
-            pokemon1.health -= int(pokemon2.move_set[randomMoveIndex].damage)
+                # Calculate Damage to Pokemon 1
+                delay_print(
+                    f"\n{pokemon2.name} dealt {pokemon2.move_set[randomMoveIndex].damage} to {pokemon1.name}\n"
+                )
+                pokemon1.health -= int(
+                    pokemon2.move_set[randomMoveIndex].damage)
         else:
             delay_print(f"\n{pokemon2.name}'s attack missed")
 
@@ -102,18 +153,3 @@ def fight(pokemon1, pokemon2):
             print(f"\n\n{pokemon1.name} fainted.")
             print(f"{pokemon2.name} won the fight.")
             return
-
-
-"""
-            if pokemon2.type in effectiveness[pokemon1.move_set[moveIndex -
-                                                                1]]:
-                delay_print(
-                    f"\n{pokemon1.name} used {pokemon1.move_set[moveIndex - 1]}. It's super effective!"
-                )
-                delay_print(
-                    f"\n{pokemon1.name} dealt {2 * pokemon1.move_set[moveIndex - 1].damage} to {pokemon2.name}"
-                )
-                pokemon2.health -= int(2 *
-                                       pokemon1.move_set[moveIndex - 1].damage)
-            else:
-"""
