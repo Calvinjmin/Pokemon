@@ -1,18 +1,7 @@
 # Import Definitions
-import sys
-import time
 from random import randint
+from functions import delay_print
 from typeEffective import *
-
-
-def delay_print(string):
-    """"
-    Function that delays system printing
-    """
-    for character in string:
-        sys.stdout.write(character)
-        sys.stdout.flush()
-        time.sleep(0.025)
 
 
 def fight(pokemon1, pokemon2):

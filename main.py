@@ -1,22 +1,15 @@
 # Pokemon Import Definitions
-# import battle
 from pokemonDatabase import *
+from initTrainer import *
 import battle
-
-# GUI Imports
-from customWindow import *
 
 
 def main():
     """
     Main Method - INIT Pokemon Battle
     """
-
-    battle.fight(Snorlax, Charizard)
-
-    # GUI Code - Implement in the future
-    # myWindow = CustomWindow()
-    # myWindow.start()
+    globalTrainer = createTrainer()
+    battle.fight(globalTrainer.pokemons[0], Charizard)
 
 
 if __name__ == "__main__":

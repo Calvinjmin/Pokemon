@@ -5,3 +5,6 @@ class Pokemon:
         self.move_set = move_set
         self.health = health
         self.level = level
+
+    def __str__(self):
+        return self.name + " (" + self.type + ")"
